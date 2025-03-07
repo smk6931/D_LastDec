@@ -20,6 +20,15 @@ void UMonsterFsm::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UE_LOG(LogTemp, Warning, TEXT("UMonsterFsm::BeginPlay%s"),*UEnum::GetValueAsString(MonsterState));
+
+	// Enum의 모든 값을 출력
+	for (int32 i = 0; i <= static_cast<int32>(EMonsterFsmState::Move); i++)
+	{
+		EMonsterFsmState State = static_cast<EMonsterFsmState>(i);
+		UE_LOG(LogTemp, Warning, TEXT("Index: %d, State: %s"), i, *UEnum::GetValueAsString(State));
+	}
+
 	// ...
 	
 }
@@ -29,7 +38,10 @@ void UMonsterFsm::BeginPlay()
 void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 	// ...
+}
+
+void UMonsterFsm::ChangeState()
+{
 }
 

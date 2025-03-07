@@ -5,7 +5,15 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "MonsterFsm.generated.h"
-
+UENUM(BlueprintType)
+enum class EMonsterFsmState : uint8
+{
+	idle UMETA(DisplayName = "Idle"),
+	Move,
+	Attack,
+	Magic,
+	Avoid
+};
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class LASTDEC_API UMonsterFsm : public UActorComponent
@@ -24,4 +32,10 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+
+public:
+	EMonsterFsmState MonsterState = EMonsterFsmState::idle;
+
+public:
+	void ChangeState();
 };

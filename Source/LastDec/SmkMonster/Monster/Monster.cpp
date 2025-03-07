@@ -21,19 +21,18 @@ AMonster::AMonster()
 	{
 		GetMesh()->SetSkeletalMesh(tempMesh.Object);
 	}
-	//
-	// ConstructorHelpers::FClassFinder<UMonsterAnim>tempAnim(TEXT(""));
-	// if (tempAnim.class)
-	// {
-	// 	GetMesh()->SetAnimClass(tempAnim.Class);
-	// }
+	
+	ConstructorHelpers::FClassFinder<UMonsterAnim>tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Monster/MonsterAnim.MonsterAnim_c'"));
+	if (tempAnim.Class)
+	{
+		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
+	}
 }
 
 // Called when the game starts or when spawned
 void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
