@@ -8,7 +8,7 @@
 UENUM(BlueprintType)
 enum class EMonsterFsmState : uint8
 {
-	idle UMETA(DisplayName = "Idle"),
+	Idle UMETA(DisplayName = "Idle"),
 	Move,
 	Attack,
 	Magic,
@@ -34,8 +34,26 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
-	EMonsterFsmState MonsterState = EMonsterFsmState::idle;
+	EMonsterFsmState MonsterState = EMonsterFsmState::Idle;
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AMonster* Monster;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class ATestPlayer* TestPlayer;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UMonsterAnim* MonsterAnim;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AAIController* Ai;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float DistPlayer = 800.0f;
+
+public:
+	void AiMove();
 	void ChangeState();
 };

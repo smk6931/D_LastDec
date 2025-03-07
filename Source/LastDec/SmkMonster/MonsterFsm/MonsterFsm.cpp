@@ -3,6 +3,10 @@
 
 #include "MonsterFsm.h"
 
+#include "LastDec/SmkMonster/Character/TestPlayer.h"
+#include "LastDec/SmkMonster/Monster/Monster.h"
+#include "Runtime/AIModule/Classes/AIController.h"
+
 
 // Sets default values for this component's properties
 UMonsterFsm::UMonsterFsm()
@@ -10,7 +14,6 @@ UMonsterFsm::UMonsterFsm()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
 	// ...
 }
 
@@ -19,18 +22,16 @@ UMonsterFsm::UMonsterFsm()
 void UMonsterFsm::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("UMonsterFsm::BeginPlay%s"),*UEnum::GetValueAsString(MonsterState));
+	Monster = Cast<AMonster>(GetOwner());
+	Ai = Cast<AAIController>(Monster->GetController());
+	TestPlayer = Cast<ATestPlayer>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 
 	// Enum의 모든 값을 출력
-	for (int32 i = 0; i <= static_cast<int32>(EMonsterFsmState::Move); i++)
+	for (int32 i = 0; i <= int32(EMonsterFsmState::Avoid); i++)
 	{
-		EMonsterFsmState State = static_cast<EMonsterFsmState>(i);
+		EMonsterFsmState State =(EMonsterFsmState)(i);
 		UE_LOG(LogTemp, Warning, TEXT("Index: %d, State: %s"), i, *UEnum::GetValueAsString(State));
 	}
-
-	// ...
-	
 }
 
 
@@ -39,6 +40,16 @@ void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	// ...
+	AiMove();
+}
+
+void UMonsterFsm::AiMove()
+{
+	FVector Distance = TestPlayer->GetActorLocation() - Monster->GetActorLocation();
+	Distance.Normalize();
+	FVector Dist = Distance * DistPlayer;
+	Ai->MoveToLocation(TestPlayer->GetActorLocation() - Dist);
+	UE_LOG(LogTemp, Warning, TEXT("Move"));
 }
 
 void UMonsterFsm::ChangeState()
