@@ -3,12 +3,30 @@
 
 #include "Monster.h"
 
+#include "Components/CapsuleComponent.h"
+#include "Components/SphereComponent.h"
+#include "LastDec/SmkMonster/MonsterFsm/MonsterFsm.h"
+
 
 // Sets default values
 AMonster::AMonster()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	MonsterFsm = CreateDefaultSubobject<UMonsterFsm>("MonsterFSM");
+	
+	ConstructorHelpers::FObjectFinder<USkeletalMesh>tempMesh(TEXT("'/Game/Characters/Mannequins/Meshes/SKM_Manny.SKM_Manny'"));
+	if (tempMesh.Object)
+	{
+		GetMesh()->SetSkeletalMesh(tempMesh.Object);
+	}
+	//
+	// ConstructorHelpers::FClassFinder<UMonsterAnim>tempAnim(TEXT(""));
+	// if (tempAnim.class)
+	// {
+	// 	GetMesh()->SetAnimClass(tempAnim.Class);
+	// }
 }
 
 // Called when the game starts or when spawned

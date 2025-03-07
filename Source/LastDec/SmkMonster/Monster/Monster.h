@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "LastDec/SmkMonster/MonsterAnim/MonsterAnim.h"
+#include "LastDec/SmkMonster/MonsterFsm/MonsterFsm.h"
 #include "Monster.generated.h"
 
 UCLASS()
@@ -25,4 +27,16 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	USkeletalMeshComponent* MonsterMesh;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UCapsuleComponent* MonsterCapsure;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UMonsterAnim* MonsterAnim;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UMonsterFsm* MonsterFsm;
 };
