@@ -19,16 +19,11 @@ void UMonsterAnim::NativeBeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("MonsterFsm::NativeBeginPlay"));
 	}
 }
-//
-// void UMonsterAnim::GetCharacterSpeed()
-// {
-// 	if (Monster)
-// 	{
-// 		Speed = FVector::DotProduct(Monster->GetVelocity(), Monster->GetActorForwardVector());
-// 		UE_LOG(LogTemp, Warning, TEXT("UMonsterAnim::GetCharacterSpeed, %f"), Speed);
-// 	}
-// }
 
-
-// GetOwningActor()
-// 
+void UMonsterAnim::GetCharacterSpeed()
+{
+	if (Monster)
+	{
+		Speed = FVector::DotProduct(Monster->GetVelocity(), Monster->GetActorForwardVector());
+	}
+}

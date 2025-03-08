@@ -31,5 +31,5 @@ public:
 	float Speed;
 
 public:
-	// void GetCharacterSpeed();
+	void GetCharacterSpeed();
 };
