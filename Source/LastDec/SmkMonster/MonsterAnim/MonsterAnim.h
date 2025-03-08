@@ -20,12 +20,16 @@ public:
 	virtual void NativeBeginPlay() override;
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
-	EMonsterFsmState AnimState;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	UMonsterFsm* MonsterFsm;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	AMonster* Monster;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	float Speed;
+
+public:
+	// void GetCharacterSpeed();
 };

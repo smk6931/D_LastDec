@@ -17,9 +17,10 @@ AMonster::AMonster()
 	if (tempMesh.Object)
 	{
 		GetMesh()->SetSkeletalMesh(tempMesh.Object);
+		GetMesh()->SetRelativeLocation(FVector(0, 0, -80));
+		GetMesh()->SetRelativeRotation(FRotator(0, 0, -90));
 	}
-	
-	ConstructorHelpers::FClassFinder<UMonsterAnim>tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Monster/MonsterAnim.MonsterAnim_c'"));
+	ConstructorHelpers::FClassFinder<UMonsterAnim>tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Monster/MonsterAnim.MonsterAnim_C'"));
 	if (tempAnim.Class)
 	{
 		GetMesh()->SetAnimInstanceClass(tempAnim.Class);

@@ -8,21 +8,27 @@ void UMonsterAnim::NativeBeginPlay()
 {
 	Super::NativeBeginPlay();
 
-	Monster = Cast<AMonster>(GetOwningActor()); //TryGetPawnOwner()
+	Monster = Cast<AMonster>(TryGetPawnOwner());
 	if (Monster)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Monster::NativeInitializeAnimation"));
+		UE_LOG(LogTemp, Warning, TEXT("Monster::NativeBeginPlay"));
 	}
-	
-	// MonsterFsm = Cast<UMonsterFsm>(Monster->FindComponentByClass<UMonsterFsm>());
-	MonsterFsm = Cast<UMonsterFsm>(Monster->MonsterFsm);
-	
+	MonsterFsm = Cast<UMonsterFsm>(Monster->FindComponentByClass<UMonsterFsm>());
 	if (MonsterFsm)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("MonsterFsm::NativeInitializeAnimation"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("MonsterFsm::XXXXXXXXXXXX"));
+		UE_LOG(LogTemp, Warning, TEXT("MonsterFsm::NativeBeginPlay"));
 	}
 }
+//
+// void UMonsterAnim::GetCharacterSpeed()
+// {
+// 	if (Monster)
+// 	{
+// 		Speed = FVector::DotProduct(Monster->GetVelocity(), Monster->GetActorForwardVector());
+// 		UE_LOG(LogTemp, Warning, TEXT("UMonsterAnim::GetCharacterSpeed, %f"), Speed);
+// 	}
+// }
+
+
+// GetOwningActor()
+// 

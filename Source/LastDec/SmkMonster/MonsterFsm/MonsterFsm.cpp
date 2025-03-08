@@ -23,6 +23,16 @@ void UMonsterFsm::BeginPlay()
 {
 	Super::BeginPlay();
 	Monster = Cast<AMonster>(GetOwner());
+	
+	MonsterAnim = Cast<UMonsterAnim>(Monster->GetMesh()->GetAnimInstance());
+	if (MonsterAnim)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Monster Casting Anim"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Monster Casting XXXX"));
+	}
 	Ai = Cast<AAIController>(Monster->GetController());
 	TestPlayer = Cast<ATestPlayer>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 
@@ -72,6 +82,8 @@ void UMonsterFsm::Idle()
 void UMonsterFsm::AiMove()
 {
 	DetectionDrawDegCircle();
+
+	// MonsterAnim->GetCharacterSpeed();
 	
 	FVector Distance = TestPlayer->GetActorLocation() - Monster->GetActorLocation();
 	FVector DistNormal = Distance;

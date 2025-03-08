@@ -35,7 +35,10 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	EMonsterFsmState MonsterState = EMonsterFsmState::Idle;
+	
 	EMonsterFsmState PreviousState = MonsterState;
 
 public:
