@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "LastDec/SmkMonster/MonsterFsm/MonsterFsm.h"
 
 

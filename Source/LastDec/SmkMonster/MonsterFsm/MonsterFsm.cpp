@@ -2,7 +2,7 @@
 
 
 #include "MonsterFsm.h"
-
+#include "MaterialHLSLTree.h"
 #include "LastDec/SmkMonster/Character/TestPlayer.h"
 #include "LastDec/SmkMonster/Monster/Monster.h"
 #include "Runtime/AIModule/Classes/AIController.h"
@@ -39,20 +39,65 @@ void UMonsterFsm::BeginPlay()
 void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	// ...
+	
 	AiMove();
 }
 
+	
 void UMonsterFsm::AiMove()
 {
+	DetectionDrawDegCircle();
+	
+	CurrentTime += GetWorld()->GetDeltaSeconds();
 	FVector Distance = TestPlayer->GetActorLocation() - Monster->GetActorLocation();
-	Distance.Normalize();
-	FVector Dist = Distance * DistPlayer;
-	Ai->MoveToLocation(TestPlayer->GetActorLocation() - Dist);
-	UE_LOG(LogTemp, Warning, TEXT("Move"));
-}
+	FVector DistNormal = Distance;
+	DistNormal.Normalize();
 
+	float RightDot = FVector::DotProduct(DistNormal,Monster->GetActorRightVector());
+	float ForwardDot = FVector::DotProduct(DistNormal,Monster->GetActorForwardVector());
+	
+	float Dir = Distance.Size();
+	
+	if (DeTection > Dir && ForwardDot > 0)
+	{
+		// Monster->SetActorLocation(Monster->GetActorLocation() + GetWorld()->GetDeltaSeconds() * DistNormal * 200.f);
+		UE_LOG(LogTemp, Warning, TEXT("Detected!!: %f"), Dir);
+		Ai->MoveToLocation(TestPlayer->GetActorLocation(),100);
+	}
+	if (CurrentTime > MakeTime)
+	{
+		float RandAngle = FMath::RandRange(0,360);
+		float RandDist = FMath::RandRange(500,700);
+		FVector Offset = FVector(FMath::Cos(RandAngle) * RandDist, FMath::Sin(RandAngle) * RandDist, 0.0f);
+		UE_LOG(LogTemp, Warning, TEXT("MoveAround!!: %f%f"), Offset.X, Offset.Y);
+		Ai->MoveToLocation(Monster->GetActorLocation() + Offset, 100);
+
+		CurrentTime = 0;
+	}
+}
 void UMonsterFsm::ChangeState()
 {
+}
+
+
+
+void UMonsterFsm::DetectionDrawDegCircle()
+{
+	if (GetWorld()) // 월드가 존재하는지 확인
+	{
+		DrawDebugCircle(
+			GetWorld(),
+			Monster->GetActorLocation(),  // 위치
+			DeTection, //원의 반지름
+			32,                // 선 개수 (32개면 부드러움)
+			FColor::Red,       // 색상
+			false,             // true이면 영구적, false이면 일정 시간 후 사라짐
+			-1.0f,             // 지속 시간 (-1 = 한 프레임 동안만 표시)
+			0,                 // 우선순위
+			1.0f,              // 선의 두께
+			FVector(1, 0, 0),  // X축 기준
+			FVector(0, 1, 0)   // Y축 기준
+		);
+	}
 }
 

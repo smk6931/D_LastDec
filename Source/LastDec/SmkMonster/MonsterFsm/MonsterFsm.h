@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "MonsterFsm.generated.h"
+
 UENUM(BlueprintType)
 enum class EMonsterFsmState : uint8
 {
@@ -51,9 +52,21 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    float DistPlayer = 800.0f;
+    float DistPlayer = 700.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DistRandom = 500.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DeTection = 750.0f;
+
+	
+	float CurrentTime = 0.0f;
+	float MakeTime = 1.0f;
+	
 
 public:
 	void AiMove();
 	void ChangeState();
+
+	UFUNCTION()
+	void DetectionDrawDegCircle();
 };
