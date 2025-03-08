@@ -15,7 +15,6 @@ UMonsterFsm::UMonsterFsm()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-	// ...
 }
 
 
@@ -41,15 +40,7 @@ void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
-	if (MonsterState != PreviousState)
-	{
-		FString StateName = StaticEnum<EMonsterFsmState>()->GetValueAsString(MonsterState);
-		
-		UE_LOG(LogTemp, Warning, TEXT("State: %s"), *UEnum::GetValueAsString((EMonsterFsmState)(int32(MonsterState))));
-		
-		// 이전 상태를 현재 상태로 업데이트
-		PreviousState = MonsterState;
-	}
+	MonsterStateLog();
 
 	switch (MonsterState)
 	{
@@ -73,8 +64,6 @@ void UMonsterFsm::Idle()
 	if (CurrentTime > 2)
 	{
 		MonsterState = EMonsterFsmState::AiMove;
-		// FString StateName = StaticEnum<EMonsterFsmState>()->GetValueAsString(MonsterState);
-		// UE_LOG(LogTemp, Warning, TEXT("MonsterState Real %s"),*UEnum::GetValueAsString((EMonsterFsmState)(int32(MonsterState))));
 		
 		CurrentTime = 0;
 	}
@@ -95,16 +84,12 @@ void UMonsterFsm::AiMove()
 	
 	if (DeTection > Dir && ForwardDot > 0)
 	{
-		// Monster->SetActorLocation(Monster->GetActorLocation() + GetWorld()->GetDeltaSeconds() * DistNormal * 200.f);
-		// UE_LOG(LogTemp, Warning, TEXT("Detected!!: %f"), Dir);
 		Ai->MoveToLocation(TestPlayer->GetActorLocation(),30);
 
 		// 거리가 공격범위 안에 들어왔을때
 		if (Dir < AttackRange)
 		{
 			MonsterState = EMonsterFsmState::Attack;
-			FString StateName = StaticEnum<EMonsterFsmState>()->GetValueAsString(MonsterState);
-			// UE_LOG(LogTemp, Warning, TEXT("MonsterState %s"),*StateName)
 		}
 	}
 	else
@@ -168,5 +153,14 @@ void UMonsterFsm::CreativeTime()
 // 몬스터 상태 출력
 void UMonsterFsm::MonsterStateLog()
 {
+	if (MonsterState != PreviousState)
+	{
+		FString StateName = StaticEnum<EMonsterFsmState>()->GetValueAsString(MonsterState);
+		
+		UE_LOG(LogTemp, Warning, TEXT("State: %s"), *UEnum::GetValueAsString((EMonsterFsmState)(int32(MonsterState))));
+		
+		// 이전 상태를 현재 상태로 업데이트
+		PreviousState = MonsterState;
+	}
 }
 
