@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "CYTPlayer.h"
+
+#include "LastDec/CYT/Public/CYTPlayer.h"
 
 // Sets default values
 ACYTPlayer::ACYTPlayer()
