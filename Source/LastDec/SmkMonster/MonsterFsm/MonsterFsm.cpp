@@ -51,6 +51,7 @@ void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
 	MonsterStateLog();
+	UE_LOG(LogTemp, Warning, TEXT("MonsterAnimSpeed%f"),MonsterAnim->Speed);
 
 	switch (MonsterState)
 	{
@@ -82,7 +83,7 @@ void UMonsterFsm::Idle()
 void UMonsterFsm::AiMove()
 {
 	DetectionDrawDegCircle();
-
+	
 	// MonsterAnim->GetCharacterSpeed();
 	
 	FVector Distance = TestPlayer->GetActorLocation() - Monster->GetActorLocation();
