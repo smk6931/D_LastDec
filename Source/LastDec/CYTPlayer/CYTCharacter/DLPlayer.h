@@ -27,11 +27,13 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
+	//springArm 정의
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	class USpringArmComponent* springArmComp;
-
+	//camera 정의
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	class UCameraComponent* cameraComp;
+	
 	
 	
 };
