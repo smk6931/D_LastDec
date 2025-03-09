@@ -4,25 +4,20 @@
 #include "MonsterAnim.h"
 #include "LastDec/SmkMonster/Monster/Monster.h"
 
-void UMonsterAnim::NativeBeginPlay()
+void UMonsterAnim::NativeInitializeAnimation()
 {
-	Super::NativeBeginPlay();
-	
-	Monster = Cast<AMonster>(GetOwningActor());
-	if (Monster)
+	Super::NativeInitializeAnimation();
+
+	Monster = Cast<AMonster>(TryGetPawnOwner());
+	if (Monster != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Monster::NativeBeginPlay"));
-		
 		MonsterFsm = Cast<UMonsterFsm>(Monster->MonsterFsm);
-		UE_LOG(LogTemp, Warning, TEXT("MonsterFsm::NativeBeginPlay"));
 	}
 }
 
 void UMonsterAnim::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
-
-	// UE_LOG(LogTemp, Warning, TEXT("AttackRange, %f"),MonsterFsm->AttackRange);
 }
 
 void UMonsterAnim::GetCharacterSpeed()
@@ -32,3 +27,13 @@ void UMonsterAnim::GetCharacterSpeed()
 		Speed = FVector::DotProduct(Monster->GetVelocity(), Monster->GetActorForwardVector());
 	}
 }
+
+// if (Monster)
+// {
+// 	UE_LOG(LogTemp, Warning, TEXT("Anim :: Monster->MonsterHp, %f"),Monster->MonsterHp);
+// }
+// if (MonsterFsm)
+// {
+// 	UE_LOG(LogTemp, Warning, TEXT("Anim :: MonsterFsm->AttackRange, %f"),MonsterFsm->AttackRange);
+// }
+	

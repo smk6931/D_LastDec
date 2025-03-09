@@ -23,16 +23,8 @@ void UMonsterFsm::BeginPlay()
 {
 	Super::BeginPlay();
 	Monster = Cast<AMonster>(GetOwner());
-	
 	MonsterAnim = Cast<UMonsterAnim>(Monster->GetMesh()->GetAnimInstance());
-	if (MonsterAnim)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Monster Casting Anim"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Monster Casting XXXX"));
-	}
+	
 	Ai = Cast<AAIController>(Monster->GetController());
 	TestPlayer = Cast<ATestPlayer>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 
@@ -49,8 +41,8 @@ void UMonsterFsm::BeginPlay()
 void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	UE_LOG(LogTemp, Warning, TEXT("MonsterFsm Anim%f"),MonsterAnim->Speed);
+	
+	// UE_LOG(LogTemp, Warning, TEXT("MonsterFsm Anim%f"),MonsterAnim->Speed);
 	
 	MonsterStateLog();
 	
