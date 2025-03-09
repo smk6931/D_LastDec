@@ -10,20 +10,25 @@
 /**
  * 
  */
+
 UCLASS()
 class LASTDEC_API UMonsterAnim : public UAnimInstance
 {
 	GENERATED_BODY()
 
 public:
-	virtual void NativeBeginPlay() override;
+	// virtual void NativeBeginPlay() override;
+	virtual void NativeInitializeAnimation() override;
+	
+	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+	
 public:
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	AMonster* Monster;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	UMonsterFsm* MonsterFsm;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
-	AMonster* Monster;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	float Speed;
