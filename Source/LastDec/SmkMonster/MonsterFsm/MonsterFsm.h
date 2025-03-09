@@ -53,6 +53,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AAIController* Ai;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AMonsterArrow* MonsterArrow;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class AMonsterArrow> ArrowFactory;
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -63,16 +70,23 @@ public:
 	float DeTection = 750.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float AttackRange = 250.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector TargetDir;
 
+	FTimerHandle MagicTimer;
 	
 	float CurrentTime = 0.0f;
 	float MakeTime = 1.0f;
 	
 
 public:
-	void Idle();
-	void AiMove();
-	void Attack();
+	virtual void Idle();
+	virtual void AiMove();
+	virtual void Attack();
+	void MagicAttack();
+	void Magic();
+	void Avoid();
+	
 	void ChangeState();
 
 	UFUNCTION()

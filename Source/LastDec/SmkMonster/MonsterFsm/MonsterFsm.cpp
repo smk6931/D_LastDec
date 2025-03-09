@@ -5,6 +5,7 @@
 
 #include "LastDec/SmkMonster/Character/TestPlayer.h"
 #include "LastDec/SmkMonster/Monster/Monster.h"
+#include "LastDec/SmkMonster/MonsterArrow/MonsterArrow.h"
 #include "Math/UnitConversion.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 
@@ -27,6 +28,7 @@ void UMonsterFsm::BeginPlay()
 	
 	Ai = Cast<AAIController>(Monster->GetController());
 	TestPlayer = Cast<ATestPlayer>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	
 
 	// Enum의 모든 값을 출력
 	for (int32 i = 0; i <= int32(EMonsterFsmState::Avoid); i++)
@@ -45,6 +47,8 @@ void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	// UE_LOG(LogTemp, Warning, TEXT("MonsterFsm Anim%f"),MonsterAnim->Speed);
 	
 	MonsterStateLog();
+
+	Magic();
 	
 	switch (MonsterState)
 	{
@@ -58,6 +62,10 @@ void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 		
 	case EMonsterFsmState::Attack:
 		Attack();
+		break;
+
+	case EMonsterFsmState::Magic:
+		Magic();
 		break;
 	}
 }
@@ -122,6 +130,25 @@ void UMonsterFsm::Attack()
 	{
 		MonsterState = EMonsterFsmState::Idle;
 	}
+}
+
+void UMonsterFsm::Magic()
+{
+	CurrentTime += GetWorld()->GetDeltaSeconds();
+	MakeTime = 2.0f;
+	if (CurrentTime > MakeTime)
+	{
+		TargetDir = (TestPlayer->GetActorLocation() - Monster->GetActorLocation());
+		TargetDir.Normalize();
+		FRotator rotate = TargetDir.Rotation();
+		MonsterArrow = GetWorld()->SpawnActor<AMonsterArrow>(ArrowFactory,FTransform(FRotator(rotate),Monster->GetActorLocation()));
+		CurrentTime = 0;
+	}
+}
+
+void UMonsterFsm::Avoid()
+{
+	
 }
 
 void UMonsterFsm::ChangeState()

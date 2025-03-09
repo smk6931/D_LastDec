@@ -20,6 +20,14 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere,BLuePrintReadWrite)
+	class UStaticMeshComponent* StaticMesh;
+	
+	UPROPERTY(EditAnywhere,BluePrintReadWrite)
+	class USphereComponent* SphereComponent;
+
+	UPROPERTY(EditAnywhere,BluePrintReadWrite)
+	class UProjectileMovementComponent* ProjectileMove;
+
+	void MagicArrowLaunch();
 };
