@@ -62,7 +62,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float DeTection = 750.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AttackRange = 150.0f;
+	float AttackRange = 250.0f;
 
 	
 	float CurrentTime = 0.0f;

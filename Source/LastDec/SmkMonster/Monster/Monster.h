@@ -43,7 +43,7 @@ public:
 
     UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	class AMonsterWeapon* MonsterWeapon;
-	
+
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float MonsterHp = 300.0f;
 

@@ -90,7 +90,7 @@ void UMonsterFsm::AiMove()
 	
 	if (DeTection > Dir && ForwardDot > 0)
 	{
-		Ai->MoveToLocation(TestPlayer->GetActorLocation(),30);
+		Ai->MoveToLocation(TestPlayer->GetActorLocation(),AttackRange-50);
 
 		// 거리가 공격범위 안에 들어왔을때
 		if (Dir < AttackRange)
@@ -106,7 +106,7 @@ void UMonsterFsm::AiMove()
 			float RandAngle = FMath::RandRange(0,360);
 			float RandDist = FMath::RandRange(500,700);
 			FVector Offset = FVector(FMath::Cos(RandAngle) * RandDist, FMath::Sin(RandAngle) * RandDist, 0.0f);
-			Ai->MoveToLocation(Monster->GetActorLocation() + Offset, 100);
+			Ai->MoveToLocation(Monster->GetActorLocation() + Offset);
 
 			CurrentTime = 0;
 		}

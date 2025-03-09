@@ -13,8 +13,11 @@ AMonsterWeapon::AMonsterWeapon()
 	
     MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("MeshComp");
     MeshComp->SetupAttachment(Root);
+	MeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>("CapsuleComp");
+	CapsuleComp->SetupAttachment(Root);
+	CapsuleComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	ConstructorHelpers::FObjectFinder<UStaticMesh>SwordMesh(TEXT("/Script/Engine.StaticMesh'/Game/Fab/Terraria__Muramasa/muramasa.muramasa'"));
 	if (SwordMesh.Succeeded())

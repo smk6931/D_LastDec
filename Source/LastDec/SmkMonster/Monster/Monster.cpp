@@ -40,7 +40,7 @@ void AMonster::BeginPlay()
 
 	if (MonsterWeapon)
 	{
-		FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, true);
+		FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, false);
 		MonsterWeapon->AttachToComponent(GetMesh(),AttachRules,TEXT("hand_rSocket"));
 	}
 }
