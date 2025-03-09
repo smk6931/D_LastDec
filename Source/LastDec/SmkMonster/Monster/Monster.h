@@ -36,4 +36,10 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UMonsterFsm* MonsterFsm;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float MonsterHp = 300.0f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UMonsterAnim* MonsterAnim;
 };

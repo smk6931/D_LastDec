@@ -31,6 +31,8 @@ AMonster::AMonster()
 void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
+
+	MonsterAnim = Cast<UMonsterAnim>(GetMesh()->GetAnimInstance());
 }
 
 // Called every frame

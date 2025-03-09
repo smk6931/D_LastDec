@@ -7,15 +7,13 @@
 void UMonsterAnim::NativeBeginPlay()
 {
 	Super::NativeBeginPlay();
-
-	Monster = Cast<AMonster>(TryGetPawnOwner());
+	
+	Monster = Cast<AMonster>(GetOwningActor());
 	if (Monster)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Monster::NativeBeginPlay"));
-	}
-	MonsterFsm = Cast<UMonsterFsm>(Monster->FindComponentByClass<UMonsterFsm>());
-	if (MonsterFsm)
-	{
+		
+		MonsterFsm = Cast<UMonsterFsm>(Monster->MonsterFsm);
 		UE_LOG(LogTemp, Warning, TEXT("MonsterFsm::NativeBeginPlay"));
 	}
 }

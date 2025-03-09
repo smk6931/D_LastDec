@@ -16,9 +16,7 @@ class LASTDEC_API UMonsterAnim : public UAnimInstance
 	GENERATED_BODY()
 
 public:
-
 	virtual void NativeBeginPlay() override;
-	
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
