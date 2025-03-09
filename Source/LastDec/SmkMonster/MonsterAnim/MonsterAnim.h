@@ -17,6 +17,7 @@ class LASTDEC_API UMonsterAnim : public UAnimInstance
 
 public:
 	virtual void NativeBeginPlay() override;
+	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)

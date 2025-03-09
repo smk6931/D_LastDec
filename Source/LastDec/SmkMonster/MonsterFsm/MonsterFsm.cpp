@@ -49,6 +49,8 @@ void UMonsterFsm::BeginPlay()
 void UMonsterFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	UE_LOG(LogTemp, Warning, TEXT("MonsterFsm Anim%f"),MonsterAnim->Speed);
 	
 	MonsterStateLog();
 	

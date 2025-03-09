@@ -18,6 +18,13 @@ void UMonsterAnim::NativeBeginPlay()
 	}
 }
 
+void UMonsterAnim::NativeUpdateAnimation(float DeltaSeconds)
+{
+	Super::NativeUpdateAnimation(DeltaSeconds);
+
+	// UE_LOG(LogTemp, Warning, TEXT("AttackRange, %f"),MonsterFsm->AttackRange);
+}
+
 void UMonsterAnim::GetCharacterSpeed()
 {
 	if (Monster)

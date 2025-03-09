@@ -39,6 +39,8 @@ void AMonster::BeginPlay()
 void AMonster::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// UE_LOG(LogTemp, Warning, TEXT("AttackRange, %f"),MonsterFsm->AttackRange);
 }
 
 // Called to bind functionality to input
