@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "LastDec/SmkMonster/MonsterAnim/MonsterAnim.h"
 #include "LastDec/SmkMonster/MonsterFsm/MonsterFsm.h"
+#include "LastDec/SmkMonster/MonsterWeapon/MonsterWeapon.h"
 #include "Monster.generated.h"
 
 UCLASS()
@@ -37,6 +38,12 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UMonsterFsm* MonsterFsm;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TSubclassOf<class AMonsterWeapon> WeaponFactory;
+
+    UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	class AMonsterWeapon* MonsterWeapon;
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float MonsterHp = 300.0f;
 
