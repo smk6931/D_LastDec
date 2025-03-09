@@ -10,6 +10,14 @@ ADLPlayer::ADLPlayer()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	ConstructorHelpers::FObjectFinder<USkeletalMesh>Tempmesh(TEXT("'/Game/Characters/Mannequins/Meshes/SKM_Manny.SKM_Manny.C'"));
+	if (Tempmesh.Object != NULL)
+	{
+		GetMesh()->SetSkeletalMesh(Tempmesh.Object);
+		GetMesh()->SetRelativeLocationAndRotation(FVector(0,0,-90), FRotator(0,-90,0));
+	}
+
+	
 	
 }
 
