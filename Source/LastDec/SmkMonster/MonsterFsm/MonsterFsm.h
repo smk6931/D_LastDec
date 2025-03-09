@@ -10,7 +10,7 @@ UENUM(BlueprintType)
 enum class EMonsterFsmState : uint8
 {
 	Idle UMETA(DisplayName = "Idle"),
-	Move,
+	AiMove,
 	Attack,
 	Magic,
 	Avoid
@@ -35,7 +35,11 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	EMonsterFsmState MonsterState = EMonsterFsmState::Idle;
+	
+	EMonsterFsmState PreviousState = MonsterState;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -49,7 +53,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AAIController* Ai;
-
+	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float DistPlayer = 700.0f;
@@ -57,6 +61,8 @@ public:
 	float DistRandom = 500.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float DeTection = 750.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AttackRange = 150.0f;
 
 	
 	float CurrentTime = 0.0f;
@@ -64,9 +70,13 @@ public:
 	
 
 public:
+	void Idle();
 	void AiMove();
+	void Attack();
 	void ChangeState();
 
 	UFUNCTION()
 	void DetectionDrawDegCircle();
+	void CreativeTime();
+	void MonsterStateLog();
 };

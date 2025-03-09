@@ -33,10 +33,13 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UCapsuleComponent* MonsterCapsure;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UMonsterFsm* MonsterFsm;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float MonsterHp = 300.0f;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UMonsterAnim* MonsterAnim;
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	UMonsterFsm* MonsterFsm;
 };
