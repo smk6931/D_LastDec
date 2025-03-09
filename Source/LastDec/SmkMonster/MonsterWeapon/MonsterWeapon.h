@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "GameFramework/Actor.h"
 #include "MonsterWeapon.generated.h"
 
 UCLASS()
-class LASTDEC_API AMonsterWeapon : public ACharacter
+class LASTDEC_API AMonsterWeapon : public AActor
 {
 	GENERATED_BODY()
 
@@ -18,11 +18,17 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere,Blueprintable)
+	class UStaticMeshComponent* MeshComp;
+	
+	UPROPERTY(EditAnywhere,Blueprintable)
+	class USceneComponent* Root;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(EditAnywhere,Blueprintable)
+	class UCapsuleComponent* CapsuleComp;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float WeaponScale = 0.01f;
 };

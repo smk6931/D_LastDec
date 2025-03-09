@@ -2,13 +2,27 @@
 
 
 #include "MonsterWeapon.h"
-
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AMonsterWeapon::AMonsterWeapon()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	Root = CreateDefaultSubobject<USceneComponent>("Root");
+	SetRootComponent(Root);
+	
+    MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("MeshComp");
+    MeshComp->SetupAttachment(Root);
+	
+	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>("CapsuleComp");
+	
+	ConstructorHelpers::FObjectFinder<UStaticMesh>SwordMesh(TEXT("/Script/Engine.StaticMesh'/Game/Fab/Terraria__Muramasa/muramasa.muramasa'"));
+	if (SwordMesh.Succeeded())
+	{
+		MeshComp->SetStaticMesh(SwordMesh.Object);
+		MeshComp->SetRelativeScale3D(FVector(WeaponScale,WeaponScale,WeaponScale));
+	}
+	
 }
 
 // Called when the game starts or when spawned
@@ -18,15 +32,5 @@ void AMonsterWeapon::BeginPlay()
 	
 }
 
-// Called every frame
-void AMonsterWeapon::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
 // Called to bind functionality to input
-void AMonsterWeapon::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
 

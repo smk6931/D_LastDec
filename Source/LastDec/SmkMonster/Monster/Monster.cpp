@@ -33,6 +33,16 @@ void AMonster::BeginPlay()
 	Super::BeginPlay();
 
 	MonsterAnim = Cast<UMonsterAnim>(GetMesh()->GetAnimInstance());
+	
+	FTransform SocketTransform = GetMesh()->GetSocketTransform(TEXT("hand_rSocket"));
+	
+	MonsterWeapon = GetWorld()->SpawnActor<AMonsterWeapon>(WeaponFactory,SocketTransform);
+
+	if (MonsterWeapon)
+	{
+		FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, true);
+		MonsterWeapon->AttachToComponent(GetMesh(),AttachRules,TEXT("hand_rSocket"));
+	}
 }
 
 // Called every frame
