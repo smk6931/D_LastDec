@@ -18,6 +18,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 public:
 	UPROPERTY(EditAnywhere,BLuePrintReadWrite)
@@ -29,5 +30,10 @@ public:
 	UPROPERTY(EditAnywhere,BluePrintReadWrite)
 	class UProjectileMovementComponent* ProjectileMove;
 
+	UPROPERTY(EditAnywhere,BluePrintReadWrite)
+	float CurrentTime;
+	
+	void MyTimer(void(AMonsterArrow::* Func)(), float MakeTime);
 	void MagicArrowLaunch();
+	void DestroyMagicArrow();
 };

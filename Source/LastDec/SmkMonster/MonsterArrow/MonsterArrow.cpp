@@ -12,7 +12,7 @@
 AMonsterArrow::AMonsterArrow()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	// PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true;
 	SphereComponent = CreateDefaultSubobject<USphereComponent>("SphereComponent");
 	SphereComponent->InitSphereRadius(10.f);
 	SphereComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
@@ -36,11 +36,32 @@ AMonsterArrow::AMonsterArrow()
 		StaticMesh->SetStaticMesh(tempMesh.Object);
 	}
 }
-
 void AMonsterArrow::BeginPlay()
 {
 	Super::BeginPlay();
 	MagicArrowLaunch();
+	UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::BeginPlay"));
+}
+
+void AMonsterArrow::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::BeginTick"));
+	
+	MyTimer(&AMonsterArrow::DestroyMagicArrow,3.0f);  // Timer 함수로 수정
+}
+
+void AMonsterArrow::MyTimer(void(AMonsterArrow::* Func)(), float MakeTime)
+{
+	CurrentTime += GetWorld()->GetDeltaSeconds();
+	
+	UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::MyTimer%f"), CurrentTime);
+	if (CurrentTime > MakeTime)
+	{
+		(this->*Func)(); // Func 호출
+		UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::Destroy"));
+		CurrentTime = 0;
+	}
 }
 
 void AMonsterArrow::MagicArrowLaunch()
@@ -49,4 +70,8 @@ void AMonsterArrow::MagicArrowLaunch()
 	ProjectileMove->Activate();
 }
 
+void AMonsterArrow::DestroyMagicArrow()
+{
+	Destroy();  // 정확하게 액터를 파괴
+}
 // Called every frame
