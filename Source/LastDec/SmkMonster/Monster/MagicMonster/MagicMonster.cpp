@@ -3,12 +3,18 @@
 
 #include "MagicMonster.h"
 
+#include "LastDec/SmkMonster/MonsterFsm/MagicFsm/MagicFsm.h"
+#include "LastDec/SmkMonster/MonsterFsm/SwordFsm/SwordFsm.h"
+
 
 // Sets default values
 AMagicMonster::AMagicMonster()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	//MonsterFsm = CreateDefaultSubobject<USwordFsm>("MonsterFSM");
+
 }
 
 // Called when the game starts or when spawned
@@ -16,7 +22,6 @@ void AMagicMonster::BeginPlay()
 {
 	Super::BeginPlay();
 	MonsterHp = 500.0f;
-	
 }
 
 // Called every frame

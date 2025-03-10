@@ -25,7 +25,6 @@ AMonsterWeapon::AMonsterWeapon()
 		MeshComp->SetStaticMesh(SwordMesh.Object);
 		MeshComp->SetRelativeScale3D(FVector(WeaponScale,WeaponScale,WeaponScale));
 	}
-	
 }
 
 // Called when the game starts or when spawned
