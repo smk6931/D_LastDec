@@ -21,6 +21,8 @@ void UMagicFsm::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+	AttackRange = 750.0f;
+	DeTection = 1500.0f;
 	
 }
 
@@ -30,6 +32,19 @@ void UMagicFsm::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	UE_LOG(LogTemp, Warning, TEXT("UMagicFsm::TickComponent"));
+
 	// ...
 }
+
+void UMagicFsm::Attack()
+{
+	Super::Attack();
+}
+//
+void UMagicFsm::AiMove()
+{
+	Super::AiMove();
+}
+
 

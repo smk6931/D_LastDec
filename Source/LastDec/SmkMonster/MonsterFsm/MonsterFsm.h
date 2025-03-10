@@ -70,6 +70,7 @@ public:
 	float DeTection = 750.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float AttackRange = 250.0f;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector TargetDir;
 
@@ -78,14 +79,14 @@ public:
 	float CurrentTime = 0.0f;
 	float MakeTime = 1.0f;
 	
-
+	
 public:
 	virtual void Idle();
 	virtual void AiMove();
 	virtual void Attack();
-	void MagicAttack();
-	void Magic();
-	void Avoid();
+	
+	virtual void Magic();
+	virtual void Avoid();
 	
 	void ChangeState();
 

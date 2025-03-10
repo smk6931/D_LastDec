@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "LastDec/SmkMonster/Monster/Monster.h"
-#include "MagicMonster.generated.h"
+#include "SwordMonster.generated.h"
 
 UCLASS()
-class LASTDEC_API AMagicMonster : public AMonster
+class LASTDEC_API ASwordMonster : public AMonster
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AMagicMonster();
+	ASwordMonster();
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,9 +25,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	class UMagicFsm* MagicFsm;
-
-	
 };

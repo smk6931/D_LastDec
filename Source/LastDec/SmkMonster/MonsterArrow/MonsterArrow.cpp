@@ -40,13 +40,12 @@ void AMonsterArrow::BeginPlay()
 {
 	Super::BeginPlay();
 	MagicArrowLaunch();
-	UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::BeginPlay"));
+	
 }
 
 void AMonsterArrow::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::BeginTick"));
 	
 	MyTimer(&AMonsterArrow::DestroyMagicArrow,3.0f);  // Timer 함수로 수정
 }
@@ -55,11 +54,9 @@ void AMonsterArrow::MyTimer(void(AMonsterArrow::* Func)(), float MakeTime)
 {
 	CurrentTime += GetWorld()->GetDeltaSeconds();
 	
-	UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::MyTimer%f"), CurrentTime);
 	if (CurrentTime > MakeTime)
 	{
 		(this->*Func)(); // Func 호출
-		UE_LOG(LogTemp, Display, TEXT("AMonsterArrow::Destroy"));
 		CurrentTime = 0;
 	}
 }
